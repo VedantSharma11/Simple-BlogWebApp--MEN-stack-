@@ -1,5 +1,5 @@
 //jshint esversion:6
-
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -18,15 +18,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 mongoose.set('strictQuery', true);
-mongoose.connect("mongodb+srv://admin-vedant:Vedantsyk9@cluster0.pjgeag2.mongodb.net/blogDB",{useNewUrlParser: true});
+mongoose.connect("process.env.MONGO_ATLAS_URL",{useNewUrlParser: true});
 
-const postSchema= mongoose.Schema({
+const postSchema= new mongoose.Schema({
       title:String,
       content:String
 });
 
 const Post=mongoose.model("Post",postSchema); 
-let posts = [];
 
 app.get("/", function(req, res){
   Post.find({},function(err,foundpost){
