@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 mongoose.set('strictQuery', true);
-mongoose.connect("process.env.MONGO_ATLAS_URL",{useNewUrlParser: true});
+mongoose.connect(process.env.MONGO_ATLAS_URL,{useNewUrlParser: true});
 
 const postSchema= new mongoose.Schema({
       title:String,
